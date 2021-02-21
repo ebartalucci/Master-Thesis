@@ -20,9 +20,13 @@ plot(samples,'-','Color',[0.25,0.25,0.25]);
 plot(target,'-','Color',[0,0.6,0]);
 plot(distr,'-','Color',[0.75,0,0]);
 
-M = max(target)/max(samples);
+% samples are g(x), target is f(x), so i need to scale g(x) so that it
+% envelopes f(x) and thus distr will scale consequently. To this end I need
+% M to be a scaling constant that modifies g(x)
+
+M = max(target./samples); % the value 1.9998 is valid? why/why not?
 figure(2); clf; hold on;
-plot(M*samples,'-','Color',[0.25,0.25,0.25]);
+plot(M.*samples,'-','Color',[0.25,0.25,0.25]);
 plot(target,'-','Color',[0,0.6,0]);
 title('Scaling');
 
