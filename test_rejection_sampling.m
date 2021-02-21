@@ -49,12 +49,14 @@ end
 distr= zeros(size(target));
 
 % Monte Carlo loop
+M = max(target./(samples+1e-8)); % is this the minimal value of M that envelopes f(x)?
 success = 0;
 for trial = 1:options.trials
     [~,point] = min(abs(cum_samples - rand));
-    ACCEPT = true;
-    if ACCEPT
-        distr(point) = distr(point) + 1;
+    u = rand; %accept if u < f/Mg, where u = unif[0,1] given that M = 1.9998 and f(x)/g(x)= 0.9558,
+                   %the point can be either accepted or rejected
+    if M*u < (target(point)/samples(point)) 
+        distr(point) = distr(point) + 1; %the following two lines accept the point if u <= f/Mg
         success = success + 1;
     end
 end
