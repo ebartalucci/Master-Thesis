@@ -1,5 +1,8 @@
+% This needs to be changed to the correct one for each spin label pair
 data = load('DEER_A1v33R1_K52C_S231C_DeerLab_alpha_5_distr.dat');
 r_axis = 10*data(:,1); % convert to Angstroem
+
+%can be either done this way
 % distr = data(:,2);
 % distr = distr/sum(distr); % normalize
 
@@ -7,9 +10,10 @@ r_axis = 10*data(:,1); % convert to Angstroem
 distr = data(:,3);
 distr = distr/sum(distr); % normalize
 
-% ### This needs to be corrected ###
-% data2 = load('sim-52-231-distr.dat');
-data2 = load('sim_190_231_distr.dat'); 
+% ### This needs to be corrected to the right pair of label considered ###
+% ### Every time save the plot in the folder 'data thesis/figures/combined_distributions', and
+% ### use the input-vNrs-simx.dat as input for the rejection sampling  ###
+data2 = load('sim-52-231-distr.dat'); % adjust to correct simulation
 r_axis2 = 10*data2(:,1);
 distr2 = data2(:,2);
 
@@ -22,16 +26,15 @@ distr2b = distr2b/sum(distr2b); % normalize
 % f(r)
 data = [r_axis distr2b distr];
 
-save('input-vNrs-52-321.dat','data','-ascii');
+save('input-vNrs-sim-52-321.dat','data','-ascii');
 
 % for reading, use
-data = load('input-vNrs-52-321.dat');
+data = load('input-vNrs-sim-52-321.dat');
 r_axis = data(:,1);
 samples = data(:,2);
 target = data(:,3);
 
 % check that it worked
-
 figure(1); clf; hold on
 plot(r_axis,distr,'k');
 plot(r_axis,distr2b,'r');
