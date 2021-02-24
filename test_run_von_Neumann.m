@@ -1,5 +1,11 @@
 clear options
 
+% % This is how to get samples and target that I will use to run the vNRS algorithm. 
+% data = load('input-vNrs-sim3-182-297.dat');
+% r_axis = data(:,1);
+% samples = data(:,2);
+% target = data(:,3);
+
 samples = sin(linspace(0,pi,181)).*linspace(0,pi,181);
 samples = samples/sum(samples);
 
